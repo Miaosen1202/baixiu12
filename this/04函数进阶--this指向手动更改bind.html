@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box {
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+	<script type="text/javascript">
+
+		//函数下还有一个bind方法 也可以用来更改函数内部this指向
+		// 第一种bind用法  先绑定    绑定完之后会产生一个更改了this之后的新的函数  让新的函数去执行一下
+		/*var newfn = fn.bind(document);// 函数是不执行的  只是用来更改内部this指向的
+		newfn(3,4,5);*/
+		
+		// 第二种bind使用方法  在函数执行的之后 先用bind更改一下this指向 然后立即执行
+		/*var oBox =document.getElementById("box");
+		fn.bind(oBox,3,8)(7,5);*/
+		
+		
+		this.x = 9; 
+		var module = {
+		  x: 81,
+		  getX: function() { return this.x; }
+		};
+		
+		console.log( module.getX() );//
+		
+		
+		
+		
+		var retrieveX = module.getX;
+		
+		console.log( retrieveX() ); // 
+		
+		console.log( retrieveX.call(module) ); // 
+			
+		console.log( retrieveX.apply(module) );
+		
+		console.log( retrieveX.bind(module)() );//
+		
+		var newFn = retrieveX.bind(module);
+		console.log( newFn() );
+		
+	</script>
+</html>

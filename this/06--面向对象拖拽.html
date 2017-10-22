@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+			div {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				left: 100px;
+				top: 100px;
+			}
+			
+		</style>
+</head>
+<body>
+      <div id="box"></div>
+	<script>
+	
+			//写一个拖拽的构造函数
+			function Drag(id){
+				// 获取页面元素 挂载到当前隐式对象上
+				this.obj = document.getElementById(id);
+				// 固定距离 挂载到this隐式对象上  初始化设定为0
+				this.disX = 0;
+				this.disY = 0;
+				this.fnDown();
+			}
+			
+			Drag.prototype.fnDown = function(){
+				
+				var that = this;
+				
+				this.obj.onmousedown = function(e){
+					e = e || event;
+					
+					that.disX = e.clientX - this.offsetLeft;
+					that.disY = e.clientY - this.offsetTop;
+					
+					
+					document.onmousemove = that.fnMove.bind(that);
+					
+					/*document.onmousemove = function(){
+						that.fnMove();
+					}
+					*/
+					document.onmouseup = that.fnUp;
+					
+					return false;
+				};
+			}
+			
+			Drag.prototype.fnMove = function(e){
+				
+				e = e || event;
+				console.log(this); //documetn 有问题
+				this.obj.style.left = e.clientX - this.disX + "px";
+				this.obj.style.top = e.clientY - this.disY  + "px";
+				
+			}
+			
+			Drag.prototype.fnUp = function(){
+				document.onmousemove = null;
+			}
+			
+			var drag1 = new Drag("box");
+			
+	</script>
+</body>
+</html>

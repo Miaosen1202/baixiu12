@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+	
+		window.onload=function(){// 当前函数的上下文执行环境 context  
+			
+		
+			var userName = "全局名";
+
+			var obj = {
+				userName : "对象名",
+				getName:
+				waitGetName:function(){
+					
+					setTimeout(function(){
+					console.log(this.userName);//
+				},1000);
+				}
+			}
+			
+			
+			// 重点： obj.getName();
+			obj.getName();
+			// 重点：应该指向
+			obj.waitGetName();
+			//重点： 知道如何更改回来this
+			  var obj2 = {
+				userName : "对象名",
+				getName:function(){               
+					console.log(this.userName);//
+				},
+				waitGetName:function(){
+					var that = this;
+					setTimeout(function(){
+						that.getName();
+					},1000);
+				}
+			}
+			obj2.waitGetName();
+			
+			
+		};
+		
+	</script>
+</html>

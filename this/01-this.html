@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ <style>
+    #box{
+      width:100px;
+      height:100px;
+      background-color: red;
+   }
+
+ </style>
+</head>
+<body>
+    <div id="box">哈哈</div>
+</body>
+ <script>
+    // this出现在以下位置，分别代表什么
+    // 1 函数中   --  this 指向Window
+    // 2 在方法中  --  this  指向的是这个方法所属的对象
+    // 3 构造函数中  -- this 就是构造函数创建的对象
+    // 4通过一个事件来触发这个函数 那么这个函数里面的this指向触发该事件的前面的那个元素对象
+
+
+   // 1.函数中   --  this 指向Window
+   //函数的直接调用  函数内部的this 指向window  相当于window在调用函数
+    function fn(){
+      console.log(this);
+    }
+    fn();//window
+
+     // 2 在方法中  --  this  指向的是这个方法所属的对象
+     //obj这个对象在调用它的方法 这个方法里面的this 指向当前的对象
+    var obj ={
+      name:'zhangsan',
+      sayHi:function(){
+        console.log(this);//Object
+      }
+    }
+
+    obj.sayHi();//obj
+ //3构造函数中  -- this 就是构造函数创建的对象 
+ // 通过new 的方式调用函数  那个函数是构造函数，里面你的
+ // this是一个隐式对象 虚拟的对象 可以理解为是一个初始化的模型
+ // 如果打印this  this打印的结果是当前的构造函数
+     function Person(name,age,sex,color,skill){
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+      this.color = color;
+      this.skill=function(){
+        console.log(skill);
+      }
+      this.conso=function(){
+        console.log(this);
+      }
+    }
+    
+    // 创建一个对象 赵云
+    var caocao = new Person('曹操',32,'男','white','计谋');
+     caocao.conso();//Person  caocao
+
+///////////////////////////////////////////////////////
+
+
+     //4通过一个事件来触发这个函数 那么这个函数里面的this指向
+     //this指向 触发该事件的前面的那个元素对象
+      var oBox = document.getElementById("box");
+     
+       oBox.onclick = function(){
+        console.log(this);
+      } 
+  </script>
+</html>

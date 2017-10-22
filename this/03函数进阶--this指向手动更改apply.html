@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//函数下还有一个方法apply() 它也可以用来更改函数内部的this 指向
+		
+		/*第一个参数: 用来更改的this指向  
+		第二个参数: 数组 数组里面可以放多个实参*/
+		
+		/*fn.call(obj,实参1,实参2……)
+		fn.apply(obj,[实参1,实参2……])*/
+		
+		function fn(a,b,c){
+			console.log(a+b+c);
+		 	console.log(this);	//
+		}
+		fn.apply(document);
+		
+		fn.apply(document,[10,20,30]);// fn();
+		
+	</script>
+</html>

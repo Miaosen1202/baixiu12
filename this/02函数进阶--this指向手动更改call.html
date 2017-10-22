@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	<div id="box"></div>
+	</body>
+	<script type="text/javascript">
+		//1.fn.call(); 用来更改this指向问题
+		function fn(a,b,c){
+			console.log(a+b+c);
+		 	console.log(this);	
+		}
+	    fn();//window
+
+		fn(12,15,10);
+		// 在函数下面有一个方法  call() 
+		//call方法 可以传入参数  第一个参数：需要更改的this指向  从第二个参数起 后面都是实际传入参数
+		// 如果第一个参数 为null 或者undefined  默认函数内部this指向window
+
+		fn.call(document); //document
+		
+		var oBox = document.getElementById('box');
+		fn.call(oBox,12,15,10);
+		
+	</script>
+</html>
